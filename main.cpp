@@ -1,4 +1,4 @@
-#include <iostream> // Statndard Input Output
+#include <iostream> // Standard Input Output
 #include <cstdlib> // Standard Library atof
 #include <cmath> // Use Of Math Functions
 #include <fstream> // File Stream Input Output
@@ -160,6 +160,7 @@ int main(int argc, char * argv[])
 
 	myFile.close();
 
+	cout << "Simulation complete. Output written to " << fileName << "..." << endl;
 	return 0;
 }
 
