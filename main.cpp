@@ -96,11 +96,11 @@ int main(int argc, char * argv[])
 	}
 	else
 	{
-	    initAlt = strtod(argv[1], NULL);
-		initVel = strtod(argv[2], NULL);
-		theta = strtod(argv[3], NULL);
-		timeStep = strtod(argv[4], NULL);
-		duration = strtod(argv[5], NULL);
+	    initAlt = strtod(argv[1], nullptr);
+		initVel = strtod(argv[2], nullptr);
+		theta = strtod(argv[3], nullptr);
+		timeStep = strtod(argv[4], nullptr);
+		duration = strtod(argv[5], nullptr);
 	}
 
 	cout << "Running Simulation..." << endl;
