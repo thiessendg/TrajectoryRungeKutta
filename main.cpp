@@ -9,8 +9,8 @@
 using namespace std;
 
 //constants
-constexpr double g = -9.80665; //gravitational constant, the y accel
-constexpr double a = 0.0; // x accel
+constexpr double g = -9.80665; //gravitational constant, the y acceleration
+constexpr double a = 0.0; // x acceleration
 constexpr double pi = 3.14159265358979323846;
 constexpr double re = 6371000.0;//mean Radius of Earth in meters
 constexpr double deg2rad = pi / 180.0;
