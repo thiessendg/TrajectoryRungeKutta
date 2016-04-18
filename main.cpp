@@ -9,8 +9,8 @@
 using namespace std;
 
 //constants
-constexpr double g = -9.80665; //gravitational constant, the y acceleration
-constexpr double a = 0.0; // x acceleration
+constexpr double g = -9.80665; //gravitational constant, the y accel
+constexpr double a = 0.0; // x accel
 constexpr double pi = 3.14159265358979323846;
 constexpr double re = 6371000.0;//mean Radius of Earth in meters
 constexpr double deg2rad = pi / 180.0;
@@ -37,7 +37,7 @@ int main(int argc, char * argv[])
 	if (argc != 6)
 	{
 		//we didn't get command line args, so prompt for them
-		cout << "Command line arguments error or not provided." << endl;
+		cout << "Command line arguments error/not provided." << endl;
 
 		cout << "Enter initial altitude/elevation: " << endl;
         cin >> initAlt;
@@ -106,10 +106,10 @@ int main(int argc, char * argv[])
 	cout << "Running Simulation..." << endl;
 
 	//Creating File Name With Vars
-	// Note: stringsteam is a stream for operating on strings. In
-	// order to concatinate strings or produce statements like
-	// those in java, we must use this stream. We CANNOT simply
-	// concatinate strings and variables
+	// Note: stringsteam is a stream for operating on strings. In order
+	// to concatinate strings or produce statements like those in java, 
+	// we must use this stream. We CANNOT simply concatinate strings 
+	// and variables
 	stringstream ss;
 	ss << "v0_" << initVel << "_ang_" << theta << ".dat";
 	string fileName = ss.str();
@@ -122,7 +122,7 @@ int main(int argc, char * argv[])
 	State projectile;
 	projectile.yPos = initAlt;
 	projectile.yVel = initVel * sin(theta);
-	projectile.yAcc = gravity(projectile.yPos);// evaluates to g at yPos = 0
+	projectile.yAcc = gravity(projectile.yPos); // g at yPos = 0
 	projectile.xPos = 0.0;
 	projectile.xVel = initVel * cos(theta);
 	projectile.xAcc = a;// a = 0
@@ -133,8 +133,8 @@ int main(int argc, char * argv[])
 	}
 	else
 	{
-	    myFile << "InitAlt = " << initAlt << "\tInitVel = " << initVel <<
-                "\ttheta = " << theta << endl;
+	    myFile << "InitAlt = " << initAlt << "\tInitVel = " << initVel 
+			<< "\ttheta = " << theta << endl;
 
         double currentTime = 0.; //current time
 
@@ -148,19 +148,22 @@ int main(int argc, char * argv[])
             {
                 // set num of digits after the decimal
                 myFile.setf(ios::fixed | ios::showpoint);
-                myFile << setprecision(6); // applies until set to something else
+                myFile << setprecision(6);
                 myFile << currentTime << endl;
                 myFile << setprecision(9);
-                myFile << "\ty=" << projectile.yPos << " y'=" << projectile.yVel <<
-                    " y''=" << projectile.yAcc << "\n\tx=" << projectile.xPos <<
-                    " x'=" << projectile.xVel << " x''=" << projectile.xAcc << endl;
+                myFile << "\ty=" << projectile.yPos << " y'=" << 
+					projectile.yVel << " y''=" << projectile.yAcc << 
+					"\n\tx=" << projectile.xPos << " x'=" << 
+					projectile.xVel << " x''=" << projectile.xAcc << 
+					endl;
             }
 		}
 	}
 
 	myFile.close();
 
-	cout << "Simulation complete. Output written to " << fileName << "..." << endl;
+	cout << "Simulation complete. Output written to " << fileName << 
+		"..." << endl;
 	return 0;
 }
 
@@ -179,7 +182,7 @@ void rk4(State & object, const double dt)
 	//
 	//  xsub[n+1] = xsub[n] + h
 	//
-	//  ysub[n+1] = ysub[n] + (1/6)(ksub[1] + 2ksub[2] + 2ksub[3] + ksub[4])
+	//  ysub[n+1] = ysub[n]+(1/6)(ksub[1]+2(ksub[2]+ksub[3])+ksub[4])
 	//  where
 	//  ksub[1] = h * f(xsub[n], ysub[n])
 	//  ksub[2] = h * f(xsub[n] + h/2, ysub[n] + ksub[1]/2)
@@ -216,10 +219,10 @@ void rk4(State & object, const double dt)
 	k4.yVel = object.yVel + k3.yAcc * dt;
 	k4.yAcc = gravity(k4.yPos);//g recomputed for yPos
 
-	object.xPos += dt * (k1.xVel + 2. * (k2.xVel + k3.xVel) + k4.xVel) / 6.;
-	object.xVel += dt * (k1.xAcc + 2. * (k2.xAcc + k3.xAcc) + k4.xAcc) / 6.;
+	object.xPos += dt*(k1.xVel + 2.*(k2.xVel + k3.xVel) + k4.xVel)/6.;
+	object.xVel += dt*(k1.xAcc + 2.*(k2.xAcc + k3.xAcc) + k4.xAcc)/6.;
 	object.xAcc += 0;//object.xAcc; //xAcc doesn't change for our sim
-	object.yPos += dt * (k1.yVel + 2. * (k2.yVel + k3.yVel) + k4.yVel) / 6.;
-	object.yVel += dt * (k1.yAcc + 2. * (k2.yAcc + k3.yAcc) + k4.yAcc) / 6.;
+	object.yPos += dt*(k1.yVel + 2.*(k2.yVel + k3.yVel) + k4.yVel)/6.;
+	object.yVel += dt*(k1.yAcc + 2.*(k2.yAcc + k3.yAcc) + k4.yAcc)/6.;
 	object.yAcc = gravity(object.yPos);
 }
