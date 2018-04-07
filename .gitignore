@@ -67,3 +67,12 @@
 /TrajectoryRungeKutta/TrajectoryRungeKutta.sln
 /TrajectoryRungeKutta/TrajectoryRungeKutta.VC.VC.opendb
 /.vs
+/x64/Release/TrajectoryRungeKutta.log
+/x64/Release/TrajectoryRungeKutta.Build.CppClean.log
+/x64/Debug/TrajectoryRungeKutta.log
+/x64/Debug/TrajectoryRungeKutta.Build.CppClean.log
+/TrajectoryRungeKutta.vcxproj.user
+/Release/TrajectoryRungeKutta.log
+/Release/TrajectoryRungeKutta.Build.CppClean.log
+/Debug/TrajectoryRungeKutta.log
+/Debug/TrajectoryRungeKutta.Build.CppClean.log
