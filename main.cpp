@@ -1,44 +1,43 @@
-#include <iostream> // Standard Input Output
-//#include <cstdlib> // Standard Library atof
-#include <cmath> // Use Of Math Functions
-#include <fstream> // File Stream Input Output
-//#include <string> // String Manipulation c_str
-#include <sstream> // Used For Variable String Name
+#include <iostream>	// Standard Input Output
+#include <cmath>	// Use Of Math Functions
+#include <fstream>	// File Stream Input Output
+#include <sstream>	// Used For Variable String Name
 #include <iomanip>
 
 using namespace std;
 
 //constants
-const double g = -9.80665; //gravitational constant, the y acceleration
-const double a = 0.0; // x acceleration
+const double g = -9.80665;	//gravitational constant, the y acceleration
+const double a = 0.0;		// x acceleration
 const double pi = 3.14159265358979323846;
 const double re = 6371000.0;//mean Radius of Earth in meters
 const double deg2rad = pi / 180.0;
 
-struct State
+struct State	//the state of the projectile - position, velocity, and acceleration
 {
 	double xPos, yPos;
 	double xVel, yVel;
 	double xAcc, yAcc;
 };
 
+//function prototypes
 void rk4(State & object, const double);
 double gravity(const double);
 
+//the main program
 int main(int argc, char * argv[])
 {
     //the input variables
-    double initAlt;
-	double initVel;//initial velocity at time0
-	double theta;//firing angle in degrees
+    double initAlt;	//initial altitude
+	double initVel;	//initial velocity at time0
+	double theta;	//firing angle in degrees
 	double timeStep;//the time step
 	double duration;//time to run sim
 
-	if (argc != 6)
+	if (argc != 6) //if we got no command line arguments 
 	{
 		//we didn't get command line args, so prompt for them
 		cout << "Command line arguments error/not provided." << endl;
-
 		cout << "Enter initial altitude/elevation: " << endl;
         cin >> initAlt;
         while (cin.fail())
@@ -105,7 +104,7 @@ int main(int argc, char * argv[])
 
 	cout << "Running Simulation..." << endl;
 
-	//Creating File Name With Vars
+	// Create filename based on input values
 	// Note: stringsteam is a stream for operating on strings. In order
 	// to concatinate strings or produce statements like those in java, 
 	// we must use this stream. We CANNOT simply concatinate strings 
@@ -136,15 +135,15 @@ int main(int argc, char * argv[])
 	    myFile << "InitAlt = " << initAlt << "\tInitVel = " << initVel 
 			<< "\ttheta = " << theta << endl;
 
-        double currentTime = 0.; //current time
+		double currentTime = 0.0; //current time
 
-		// Do required integration via rk4
-		while (currentTime <= duration && projectile.yPos >= 0.)
+		// Do required integration using 4th order Runge Kutta
+		while (currentTime <= duration && projectile.yPos >= 0.0)
 		{
             currentTime += timeStep;
 			rk4(projectile, timeStep);
 
-			if (currentTime <= duration && projectile.yPos >= 0.)
+			if (currentTime <= duration && projectile.yPos >= 0.0)
             {
                 // set num of digits after the decimal
                 myFile.setf(ios::fixed | ios::showpoint);
@@ -162,8 +161,7 @@ int main(int argc, char * argv[])
 
 	myFile.close();
 
-	cout << "Simulation complete. Output written to " << fileName << 
-		"..." << endl;
+	cout << "Simulation complete. Output written to " << fileName << "." << endl;
 	return 0;
 }
 
