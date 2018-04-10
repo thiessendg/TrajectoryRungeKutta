@@ -77,3 +77,9 @@
 /Debug/TrajectoryRungeKutta.log
 /Debug/TrajectoryRungeKutta.Build.CppClean.log
 .idea
+/Debug/
+/Release/
+.metadata
+.settings
+.cproject
+.project
